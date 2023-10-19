@@ -25,12 +25,17 @@ public class Main {
 
             switch (option) {
                 case "1":
-                    System.out.print("Ingresa el valor que deseas insertar en la cola: ");
-                    int valor = sc.nextInt();
-                    sc.nextLine();
-                    cd.Insertar(valor);
-                    System.out.println("Presiona 'Enter' para continuar...");
-                    sc.nextLine();
+                    try {
+                        System.out.print("Ingresa el valor que deseas insertar en la cola: ");
+                        int valor = Integer.parseInt(sc.nextLine());
+                        cd.Insertar(valor);
+                        System.out.println("Presiona 'Enter' para continuar...");
+                        sc.nextLine();
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error: Debes ingresar un número.");
+                        System.out.println("Presiona 'Enter' para continuar...");
+                        sc.nextLine();
+                    }
                     break;
                 case "2":
                     cd.BorrarCola();
@@ -61,6 +66,5 @@ public class Main {
             }
         } while (!option.equals("6"));
         sc.close();
-
     }
 }
