@@ -14,8 +14,9 @@ public class ColaDoble {
 
         Scanner sc = new Scanner(System.in);
 
-        if(fin == MAX - 1){
+        if ((inicio == 0 && fin == MAX - 1) || (fin + 1) % MAX == inicio) {
             System.out.println("La cola ya esta llena.");
+            return;
         }
         else{
             if (inicio == -1) {
@@ -37,12 +38,12 @@ public class ColaDoble {
                         break;
                     case "2":
                         if (inicio == 0) {
-                            System.out.println("No se puede insertar por el inicio, ya hay un elemento ocupando ese lugar.");
+                            inicio = MAX - 1;
                         } else {
                             inicio = inicio - 1;
-                            cola[inicio] = valor;
-                            System.out.println("Tú elemento: " + valor + " Se inserto en la posicion: " + "[" + fin + "]");
                         }
+                        cola[inicio] = valor;
+                        System.out.println("Tú elemento: " + valor + " Se inserto en la posicion: " + "[" + inicio + "]");
                         break;
                 }
 
@@ -65,8 +66,13 @@ public class ColaDoble {
         if (inicio == -1 && fin == -1) {
             System.out.println("Cola vacía");
         } else {
-            for (int i = inicio; i <= fin; i++) {
+            int i = inicio;
+            while (true){
                 System.out.println(cola[i] + "[" + i + "]");
+                if (i == fin){
+                    break;
+                }
+                i = (i + 1) % MAX;
             }
             System.out.println();
         }
@@ -88,10 +94,7 @@ public class ColaDoble {
                         inicio = -1;
                         fin = -1;
                     }else{
-                        for (int i = inicio; i < fin; i++) {
-                            cola[i] = cola[i + 1];
-                        }
-                        fin--;
+                        inicio = (inicio + 1) % MAX;
                     }
                     break;
                 case "2":
@@ -104,13 +107,8 @@ public class ColaDoble {
                     }
                     break;
             }
-
-
         }
     }
 
+
 }
-//Insertar
-//BorrarCola
-//VerCola
-//Eliminar item
