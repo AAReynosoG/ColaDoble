@@ -2,113 +2,67 @@ import java.util.Scanner;
 
 public class ColaDoble {
 
-    final static int MAX = 2;
-    static int[] cola = new int[MAX];
-    static int inicio = -1;
-    static int fin = -1;
+    final static int MAX = 5; 
+    int[] cola = new int[MAX];
+    int inicio = -1;
+    int fin = -1;
 
-    Scanner sc = new Scanner(System.in);
-
-
-    public void Insertar(int valor) {
-
-        Scanner sc = new Scanner(System.in);
-
+    public void Insertar(int valor, boolean alFinal) {
         if ((inicio == 0 && fin == MAX - 1) || (fin + 1) % MAX == inicio) {
-            System.out.println("La cola ya esta llena.");
+            System.out.println("La cola ya está llena.");
             return;
         }
-        else{
-            if (inicio == -1) {
-                inicio = fin = 0;
-                cola[fin] = valor;
-                System.out.println("Tú elemento: " + valor + " Se inserto en la posicion: " + "[" + fin + "]");
-            } else {
-                System.out.println("¿Quieres Insertar por el final de la cola? \n 1).Si \n 2).No");
-                String opcion = sc.nextLine();
-                switch (opcion) {
-                    case "1":
-                        if (fin == MAX - 1) {
-                            System.out.println("No se puede insertar por el final, la cola ya esta llena.");
-                        } else {
-                            fin = fin + 1;
-                            cola[fin] = valor;
-                            System.out.println("Tú elemento: " + valor + " Se inserto en la posicion: " + "[" + fin + "]");
-                        }
-                        break;
-                    case "2":
-                        if (inicio == 0) {
-                            inicio = MAX - 1;
-                        } else {
-                            inicio = inicio - 1;
-                        }
-                        cola[inicio] = valor;
-                        System.out.println("Tú elemento: " + valor + " Se inserto en la posicion: " + "[" + inicio + "]");
-                        break;
-                }
 
-            }
+        if (inicio == -1) { 
+            inicio = 0;
+            fin = 0;
+        } else if (alFinal) {
+            fin = (fin + 1) % MAX;
+        } else {
+            inicio = (inicio - 1 + MAX) % MAX;
         }
+        cola[alFinal ? fin : inicio] = valor;
+        System.out.println("Elemento " + valor + " insertado en la posición: [" + ((alFinal ? fin : inicio)) + "]");
     }
 
-    public int[] BorrarCola() {
-        if (inicio == -1 && fin == -1) {
-            System.out.println("La cola ya esta vacía");
-        } else {
-            System.out.println("Cola borrada.");
+    public void Eliminar(boolean delFinal) {
+        if (inicio == -1) {
+            System.out.println("La cola está vacía.");
+            return;
         }
-        inicio = -1;
-        fin = -1;
-        return new int[MAX];
+
+        int pos = delFinal ? fin : inicio;
+        int elementoEliminado = cola[pos];        
+
+        if (inicio == fin) { 
+            inicio = -1;
+            fin = -1;
+        } else if (delFinal) {
+            fin = (fin - 1 + MAX) % MAX;
+        } else {
+            inicio = (inicio + 1) % MAX;
+        }
+        System.out.println("Elemento " + elementoEliminado + " eliminado del " + (delFinal ? "final" : "inicio") + " de la posicion: [" + pos + "]");
     }
 
     public void VerCola() {
-        if (inicio == -1 && fin == -1) {
+        if (inicio == -1) {
             System.out.println("Cola vacía");
-        } else {
-            int i = inicio;
-            while (true){
-                System.out.println(cola[i] + "[" + i + "]");
-                if (i == fin){
-                    break;
-                }
-                i = (i + 1) % MAX;
-            }
-            System.out.println();
+            return;
         }
+        System.out.println("Contenido de la cola:");
+        int i = inicio;
+        do {
+            System.out.println("Posición [" + i + "] : " + cola[i]);
+            i = (i + 1) % MAX;
+        } while (i != (fin + 1) % MAX);
+        System.out.println(); 
     }
+    
 
-
-    public void EliminarItem() {
-        if (inicio == -1 && fin == -1) {
-            System.out.println("No hay nada que borrar. La cola esta vacía.");
-        } else {
-
-            System.out.println("¿Quieres eliminar por el inicio o final de la cola? \n 1).Inicio \n 2).Final");
-            String opcion = sc.nextLine();
-
-            switch (opcion) {
-                case "1":
-                    System.out.println("Se elimino el numero: " + cola[inicio] + " de la posicion: " + inicio);
-                    if(inicio == fin){
-                        inicio = -1;
-                        fin = -1;
-                    }else{
-                        inicio = (inicio + 1) % MAX;
-                    }
-                    break;
-                case "2":
-                    System.out.println("Se elimino el numero: " + cola[fin] + " de la posicion: " + fin);
-                    if(inicio == fin){
-                        inicio = -1;
-                        fin = -1;
-                    }else{
-                        fin = (fin - 1 + MAX) % MAX;
-                    }
-                    break;
-            }
-        }
+    public void BorrarCola() {
+        inicio = -1;
+        fin = -1;
+        System.out.println("Cola borrada.");
     }
-
-
 }
