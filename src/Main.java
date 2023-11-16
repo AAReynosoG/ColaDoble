@@ -43,10 +43,10 @@ public class Main {
                     cd.VerCola();
                     break;
                 case "4":
-                    System.out.print("Ingresa '1' para eliminar del inicio o '2' para eliminar del final: ");
-                    String subOptionDel = sc.nextLine();
-                    boolean delFinal = "2".equals(subOptionDel);
-                    cd.Eliminar(delFinal);
+                        System.out.print("Ingresa '1' para eliminar del inicio o '2' para eliminar del final: ");
+                        String subOption = sc.nextLine();
+                        boolean delFinal = "2".equals(subOption);
+                        cd.Eliminar(delFinal);
                     break;
                 case "5":
                     Creditos.Creditos(); 

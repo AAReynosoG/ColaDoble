@@ -30,11 +30,13 @@ public class ColaDoble {
             System.out.println("La cola está vacía.");
             return;
         }
-
+    
         int pos = delFinal ? fin : inicio;
-        int elementoEliminado = cola[pos];        
-
-        if (inicio == fin) { 
+        int elementoEliminado = cola[pos];
+        
+        System.out.println("Elemento " + elementoEliminado + " eliminado del " + (delFinal ? "final" : "inicio") + " en la posición: [" + pos + "]");
+    
+        if (inicio == fin) {
             inicio = -1;
             fin = -1;
         } else if (delFinal) {
@@ -42,8 +44,8 @@ public class ColaDoble {
         } else {
             inicio = (inicio + 1) % MAX;
         }
-        System.out.println("Elemento " + elementoEliminado + " eliminado del " + (delFinal ? "final" : "inicio") + " de la posicion: [" + pos + "]");
     }
+    
 
     public void VerCola() {
         if (inicio == -1) {
