@@ -2,17 +2,12 @@ import java.util.Scanner;
 
 public class ColaDoble {
 
-    final static int MAX = 2;
+    final static int MAX = 10;
     static int[] cola = new int[MAX];
     static int inicio = -1;
     static int fin = -1;
 
     Scanner sc = new Scanner(System.in);
-
-    public boolean estaLlena(){
-        return (fin + 1) % MAX == inicio;
-    }
-
 
     public void Insertar(int valor) {
 
